@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "model-service-benchmark-python"
+version = "0.1.0"
+description = ""
+authors = ["Hemato.AI Support <support@hemato.ai>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+cryptography = "^43.0.1"
+requests = "^2.32.3"
+pyjwt = "^2.9.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
