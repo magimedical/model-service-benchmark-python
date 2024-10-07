@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import requests
 import jwt
 from cryptography.hazmat.primitives import serialization
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from typing import List, Dict, Any, Optional
 
 # Constants
@@ -202,7 +202,7 @@ def main():
         # Save results
         output_filename = f"./{int(time.time() * 1e9)}-dataset_definition.json"
         with open(output_filename, 'w') as f:
-            json.dump(vars(dataset), f, indent=2)
+            json.dump(asdict(dataset), f, indent=2)
 
 if __name__ == "__main__":
     main()

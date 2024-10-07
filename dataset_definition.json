@@ -1,0 +1,45 @@
+{
+  "id": "dyfczymvai",
+  "has_malaria": [
+    {
+      "path": "000000_tile1_1_has.jpg",
+      "rbc_diameter": 85
+    },
+    {
+      "path": "002f20ad-2ace-499c-9335-c9080bc3e6b5.png",
+      "rbc_diameter": 100
+    },
+    {
+      "path": "003a89b0-a095-417a-8dd6-f408339bbc68.png",
+      "rbc_diameter": 100
+    },
+    {
+      "path": "w66_100.jpg"
+    },
+    {
+      "path": "w66_101.jpg"
+    }
+  ],
+  "no_malaria": [
+    {
+      "path": "17.jpg",
+      "rbc_diameter": 35
+    },
+    {
+      "path": "10.jpg",
+      "rbc_diameter": 87
+    },
+    {
+      "path": "0d1e4cd2-df00-4491-9cba-f745992e9a7c_0-30_1-30.jpg",
+      "rbc_diameter": 60
+    },
+    {
+      "path": "s5_13_6_tiled 2.jpg",
+      "results": {}
+    },
+    {
+      "path": "s5_13_6_tiled.jpg",
+      "results": {}
+    }
+  ]
+}
