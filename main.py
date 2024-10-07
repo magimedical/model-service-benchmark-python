@@ -1,11 +1,13 @@
+import hashlib
 import json
-import os
-import time
-from datetime import datetime, timedelta
-import requests
 import jwt
+import os
+import requests
+import time
+
 from cryptography.hazmat.primitives import serialization
 from dataclasses import dataclass, field, asdict
+from datetime import datetime, timedelta
 from typing import List, Dict, Any, Optional
 
 # Constants
@@ -13,7 +15,7 @@ PATH_TO_DATASET_DEFINITION_JSON = "./dataset_definition.json"
 DATASET_ROOT_PATH = "../../../BloodSamples/MalariaDataset"
 SERVICE_ROOT_PATH = "https://in.api.hemato.ai"
 
-USE_THIS_AUTH_METHOD = "keypair" # accpeted values are keypair or email
+USE_THIS_AUTH_METHOD = "email" # accpeted values are keypair or email
 
 # if the above is set to  "keypair", we are using public/private key, then ask for the values for the the following by contacting support@hemato.ai
 AUTH_AUDIENCE = "dev.api.hemato.ai"
@@ -44,8 +46,33 @@ class Result:
     summary: List[Dict[str, List[float]]] = field(default_factory=list)
 
 
+
+def hash_password(password: str) -> str:
+    # Encode the password string to bytes
+    password_bytes = password.encode('utf-8')
+
+    # Calculate SHA256 hash
+    hash_object = hashlib.sha256(password_bytes)
+
+    # Get the hexadecimal representation
+    hex_hash = hash_object.hexdigest()
+
+    return hex_hash
+
 def session_token_for_account(user_email: str, user_password: str) -> str:
-    raise Exception("not implemented yet")
+    payload = {
+        "user": user_email,
+        "pass_hash": hash_password(user_password),
+    }
+    response = requests.post(
+        f"{SERVICE_ROOT_PATH}/auth/login",
+        json=payload
+    )
+    response.raise_for_status
+
+    response = response.json()
+
+    return response["results"]["token"]["HY_APP_AUTH_v1"]
 
 def generate_auth_token(auth_audience: str, auth_issuer: str, key_id: str, private_key_path: str) -> str:
     with open(private_key_path, 'rb') as key_file:
